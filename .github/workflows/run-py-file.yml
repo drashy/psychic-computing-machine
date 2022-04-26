@@ -17,15 +17,19 @@ jobs:
           python-version: 3.8 #install the python needed
 
       - run: |
-          python3 -c "import os; print(os.listdir())"
+          python3 -c "import os; print([i for i in os.walk('.')])"
 
       - uses: actions/checkout@v3 # checkout the repository content to github runner.
         with:
-          #repository: ''
           path: 'poop'
 
+      - uses: actions/checkout@v3 # Grab the InfraTools repo
+        with:
+          repository: 'patchworkhealth/InfraTools'
+          path: 'InfraTools'
+
       - run: |
-          python3 -c "import os; print(os.listdir())"
+          python3 -c "import os; print([i for i in os.walk('.')])"
 
 
 
