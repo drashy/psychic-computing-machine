@@ -1,4 +1,4 @@
-name: py
+name: run some pythong
 
 on:
   schedule:
@@ -10,16 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout repo content
-        uses: actions/checkout@v2 # checkout the repository content to github runner.
-
       - name: setup python
         uses: actions/setup-python@v2
         with:
           python-version: 3.8 #install the python needed
 
-      - name: execute py script # run the run.py to get the latest data
+      - name: execute py script before checkout
         run: |
-          python hello.py
+          python3 -c "import os; print(os.listdir())"
+
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner.
+
+      - name: execute py script after checkout
+        run: |
+          python3 -c "import os; print(os.listdir())"
 #        env:
 #          key: ${{ secrets.key }} # if run.py requires passwords..etc, set it as secrets
